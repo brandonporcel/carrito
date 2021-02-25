@@ -34,6 +34,15 @@ const pintarCards = (fetchData) => {
 const obtenerProducto = (fetchData) => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.card-btn')) {
+			const idBoton = e.target.dataset.id;
+			const objetoFiltrado = fetchData.filter((producto) => {
+				const apiId = producto.id;
+				if (apiId == idBoton) {
+					return producto;
+				}
+			});
+			console.log(e.target.dataset.id);
+			console.log(objetoFiltrado);
 		}
 	});
 };
