@@ -4,7 +4,7 @@ const $cards = d.getElementById('cards');
 const cardTemplate = d.getElementById('card-template').content;
 const $fragment = d.createDocumentFragment();
 let carrito = {};
-
+let producto = {};
 // funciones
 const fetchData = async () => {
 	try {
@@ -34,15 +34,22 @@ const pintarCards = (fetchData) => {
 const obtenerProducto = (fetchData) => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.card-btn')) {
-			const idBoton = e.target.dataset.id;
-			const objetoFiltrado = fetchData.filter((producto) => {
-				const apiId = producto.id;
-				if (apiId == idBoton) {
-					return producto;
-				}
-			});
-			console.log(e.target.dataset.id);
-			console.log(objetoFiltrado);
+			const objetoFiltrado = fetchData.filter(
+				(producto) => producto.id == e.target.dataset.id
+			);
+			objetoFiltrado[0].cantidad = 1;
+			// producto es aquel objeto que el user selecciono
+			producto = objetoFiltrado[0];
+			// significa que encontro resultados,
+			// el producto se esta duplicando
+			if (carrito.hasOwnProperty(producto.id)) {
+				producto.cantidad = carrito[producto.id].cantidad + 1;
+			}
+			console.log(producto);
+			// carrito va a tener como propieddes los id de los productos,y dentro de estos,su info pertiennte
+			// el spread operator es important
+			// si existe, lo reescribe. si no existe lo crea
+			carrito[producto.id] = { ...producto };
 		}
 	});
 };
