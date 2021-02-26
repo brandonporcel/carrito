@@ -52,13 +52,14 @@ const pintarInfoCarrito = () => {
 		$fragment.appendChild($clone);
 	});
 	$items.appendChild($fragment);
+	pintarcuentaFinal();
 };
 const pintarcuentaFinal = () => {
 	$footer.innerHTML = '';
 
-	if (!carrito.hasOwnProperty(producto.id)) {
+	if (Object.values(carrito).length === 0) {
 		$footer.innerHTML =
-			'<th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>';
+			'<th scope="row" colspan="5">Carrito vacío - comience a comprar!!!</th>';
 		return;
 	}
 	let nCantidad = 0;
@@ -78,12 +79,10 @@ const pintarcuentaFinal = () => {
 	$footer.appendChild($fragment);
 	const vaciarCarritoBtn = d.getElementById('vaciar-carrito');
 	vaciarCarritoBtn.addEventListener('click', () => {
-		console.log(carrito);
 		carrito = {};
 		pintarInfoCarrito();
 	});
 };
-
 const obtenerProducto = (fetchData) => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.card-btn')) {
@@ -105,10 +104,27 @@ const obtenerProducto = (fetchData) => {
 			carrito[producto.id] = { ...producto };
 
 			pintarInfoCarrito();
-			pintarcuentaFinal();
 		}
 	});
 };
+const btnAccion = (sumar, restar, e) => {
+	const producto = e.target.dataset.id;
+	if (e.target.matches(sumar)) {
+		carrito[producto].cantidad++;
+	}
+	if (e.target.matches(restar)) {
+		carrito[producto].cantidad--;
+		if (carrito[producto].cantidad === 0) {
+			delete carrito[producto];
+			return;
+		}
+		pintarInfoCarrito();
+	}
+	pintarInfoCarrito();
+};
 d.addEventListener('DOMContentLoaded', () => {
 	fetchData();
+});
+d.addEventListener('click', (e) => {
+	btnAccion('button[data-addBtn]', 'button[data-removeBtn]', e);
 });
