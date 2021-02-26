@@ -8,6 +8,7 @@ const $carritoTemplate = d.getElementById('carrito-template').content;
 const $footerTemplate = d.getElementById('footer-template').content;
 const $fragment = d.createDocumentFragment();
 let carrito = {};
+
 let producto = {};
 // funciones
 const fetchData = async () => {
@@ -34,6 +35,7 @@ const pintarCards = (fetchData) => {
 	});
 	$cards.appendChild($fragment);
 };
+// localstorage
 const pintarInfoCarrito = () => {
 	$items.innerHTML = '';
 	// Object.values devuelve un array con los valores mas no las propiedades de los objectos.
@@ -52,6 +54,8 @@ const pintarInfoCarrito = () => {
 		$fragment.appendChild($clone);
 	});
 	$items.appendChild($fragment);
+
+	localStorage.setItem('carrito', JSON.stringify(carrito));
 	pintarcuentaFinal();
 };
 const pintarcuentaFinal = () => {
@@ -124,6 +128,10 @@ const btnAccion = (sumar, restar, e) => {
 };
 d.addEventListener('DOMContentLoaded', () => {
 	fetchData();
+	if (localStorage.getItem('carrito')) {
+		carrito = JSON.parse(localStorage.getItem('carrito'));
+		pintarInfoCarrito();
+	}
 });
 d.addEventListener('click', (e) => {
 	btnAccion('button[data-addBtn]', 'button[data-removeBtn]', e);
