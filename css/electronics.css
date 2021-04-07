@@ -74,54 +74,7 @@ img {
 	cursor: pointer;
 }
 /*  */
-.hero {
-	height: 575px;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.hero-title {
-	font-size: 72px;
-}
-/*  */
-.select-category-ctn {
-	height: 250px;
-}
-.categories-article {
-	padding-top: 20px;
-	padding-bottom: 20px;
-	display: flex;
-	justify-content: space-between;
-}
 
-.categories-ctn {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 200px;
-	width: 50%;
-}
-
-.categories-list li {
-	margin-bottom: 10px;
-}
-.categories-list li a:hover {
-	color: var(--hover-text-color);
-}
-.categories-gap {
-	border-left: 1px solid var(--text-color);
-}
-.category-img-wrapper {
-	width: 50%;
-	height: auto;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-}
-.category-img-ctn {
-	width: 32%;
-}
 /*  */
 .footer {
 	border-top: 1px solid;
