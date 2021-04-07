@@ -1,10 +1,28 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+@font-face {
+	font-family: MonumentExtended;
+	src: url(../assets/fonts/MonumentExtended/MonumentExtended-Regular.otf);
 }
 body {
 	background-color: #669;
+	font-family: MonumentExtended;
 }
-.cards {
+a {
+	color: initial;
+	text-decoration: none;
+}
+ul {
+	list-style: none;
+}
+img {
+	width: 100%;
+	height: auto;
+}
+/* .cards {
 	width: 90%;
 	margin: 0 auto;
 	display: grid;
@@ -29,4 +47,63 @@ body {
 .card-btn:hover {
 	cursor: pointer;
 	box-shadow: 2px 2px white;
+} */
+.container {
+	padding: 0 50px;
+}
+.header {
+	position: sticky;
+	top: 0;
+	border-bottom: 1px solid;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: auto;
+}
+/*  */
+.hero {
+	height: 575px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+
+	justify-content: center;
+}
+.hero-title {
+	font-size: 72px;
+}
+/*  */
+.select-category-ctn {
+	height: 250px;
+}
+.categories-article {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.categories-article span {
+	border-left: 1px solid #dfdfdd;
+}
+.categories-ctn {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 200px;
+}
+
+.categories-list li {
+	margin-bottom: 10px;
+}
+.category-img-ctn {
+	width: 15%;
+	height: auto;
+}
+/*  */
+.footer {
+	border-top: 1px solid;
+	text-align: center;
+	padding: 10px 0;
 }
