@@ -3,16 +3,24 @@
 	margin: 0;
 	padding: 0;
 }
+:root {
+	/* --bg-color: #1c1c1c;
+	--bg-color: #669;
+	--text-color: #dfdfdd; */
+	--hover-text-color: #dc9457;
+}
+
 @font-face {
 	font-family: MonumentExtended;
 	src: url(../assets/fonts/MonumentExtended/MonumentExtended-Regular.otf);
 }
 body {
-	background-color: #669;
+	background-color: var(--bg-color);
 	font-family: MonumentExtended;
+	color: var(--text-color);
 }
 a {
-	color: initial;
+	color: inherit;
 	text-decoration: none;
 }
 ul {
@@ -62,13 +70,15 @@ img {
 	justify-content: space-between;
 	height: auto;
 }
+.darkmodeBtn {
+	cursor: pointer;
+}
 /*  */
 .hero {
 	height: 575px;
 	width: 100%;
 	display: flex;
 	align-items: center;
-
 	justify-content: center;
 }
 .hero-title {
@@ -84,26 +94,57 @@ img {
 	display: flex;
 	justify-content: space-between;
 }
-.categories-article span {
-	border-left: 1px solid #dfdfdd;
-}
+
 .categories-ctn {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	height: 200px;
+	width: 50%;
 }
 
 .categories-list li {
 	margin-bottom: 10px;
 }
-.category-img-ctn {
-	width: 15%;
+.categories-gap {
+	border-left: 1px solid var(--text-color);
+}
+.category-img-wrapper {
+	width: 50%;
 	height: auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.category-img-ctn {
+	width: 32%;
 }
 /*  */
 .footer {
 	border-top: 1px solid;
 	text-align: center;
 	padding: 10px 0;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-color: #1c1c1c;
+		/* --bg-color: #669; */
+		--text-color: #dfdfdd;
+	}
+	body {
+		color: var(--text-color);
+		background-color: var(--bg-color);
+		transition: color 0.5s, background-color 0.5s;
+	}
+}
+@media (prefers-color-scheme: light) {
+	:root {
+		--bg-color: #f8f3ed;
+		--text-color: #2d2c2a;
+	}
+	body {
+		color: var(--text-color);
+		background-color: var(--bg-color);
+		transition: color 0.5s, background-color 0.5s;
+	}
 }
