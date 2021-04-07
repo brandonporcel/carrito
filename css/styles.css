@@ -125,11 +125,10 @@ img {
 	text-align: center;
 	padding: 10px 0;
 }
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
 	:root {
-		--bg-color: #1c1c1c;
-		/* --bg-color: #669; */
-		--text-color: #dfdfdd;
+		--bg-color: #f8f3ed;
+		--text-color: #2d2c2a;
 	}
 	body {
 		color: var(--text-color);
@@ -137,10 +136,11 @@ img {
 		transition: color 0.5s, background-color 0.5s;
 	}
 }
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
 	:root {
-		--bg-color: #f8f3ed;
-		--text-color: #2d2c2a;
+		--bg-color: #1c1c1c;
+		/* --bg-color: #669; */
+		--text-color: #dfdfdd;
 	}
 	body {
 		color: var(--text-color);
