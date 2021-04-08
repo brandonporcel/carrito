@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Carrito</title>
+		<title>TUVI | electronics</title>
 		<link
 			rel="shortcut icon"
 			href="../assets/images/favicon.ico"
@@ -23,16 +23,19 @@
 			</header>
 			<nav class="sort-nav">
 				<div class="category-sort">
-					<label for="">shop by category</label>
-					<select name="" id="sort-by-category">
-						<option value=""></option>
-						<option value="/collections/living">jewelery</option>
+					<label for="sort-by-category">shop by category</label>
+					<select name="sort-by-category" class="select" id="sort-by-category">
+						<option value="">-</option>
+						<option value="jewelery">jewelery</option>
 					</select>
 				</div>
 				<div class="product-sort">
 					<label for="sort-by">filter by</label>
-					<select name="sort-by" id="sort-by-select">
-						<option value="">A-Z</option>
+					<select name="sort-by" class="select" id="sort-by-select">
+						<option value="-">-</option>
+						<option value="title-ascending">A-Z</option>
+						<option value="price-ascending">Price: Low to High</option>
+						<option value="price-descending">Price: High to Low</option>
 					</select>
 				</div>
 			</nav>
@@ -57,14 +60,14 @@
 					<img src="" alt="" />
 				</div>
 				<p class="pop-up-name"></p>
-				<p class="pop-up-price"></p>
+				<p class="pop-up-price product-price"></p>
 				<div class="pop-up-description-ctn">
-					<p class="pop-up-description-title">descreipocion</p>
+					<p class="pop-up-description-title">description</p>
 					<p class="pop-up-description"></p>
 				</div>
-				<div class="pop-up-btn-ctn">
-					<button class="pop-up-cart"></button>
-					<button class="pop-up-buy"></button>
+				<div>
+					<button class="pop-up-btn pop-up-cart">Add To Cart</button>
+					<button class="pop-up-btn pop-up-buy">Buy Now</button>
 				</div>
 			</article>
 		</section>
