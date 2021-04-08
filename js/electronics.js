@@ -1,6 +1,7 @@
 import darkMode from './modules/darkMode.js';
 import getData from './modules/getData.js';
 const d = document;
+
 const drawProducts = async () => {
 	const $fragment = d.createDocumentFragment();
 	const $productTemplate = d.getElementById('product-template').content;
@@ -26,11 +27,13 @@ const productPopUp = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.product') || e.target.matches('.product *')) {
 			d.querySelector('.pop-up-wrapper').classList.remove('none');
-		}
-		if (e.target.matches('.pop-up-close-btn')) {
+		} else if (e.target.matches('.pop-up-close-btn')) {
 			d.querySelector('.pop-up-wrapper').classList.add('none');
-		} else if (!e.target.matches('.pop-up-ctn *')) {
-			console.log('toco otra cosa');
+		} else if (
+			!e.target.matches('.pop-up-ctn *') &&
+			!e.target.matches('.pop-up-ctn')
+		) {
+			d.querySelector('.pop-up-wrapper').classList.add('none');
 		}
 	});
 };
