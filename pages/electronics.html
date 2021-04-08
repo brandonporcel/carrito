@@ -5,7 +5,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Carrito</title>
-		<link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+		<link
+			rel="shortcut icon"
+			href="../assets/images/favicon.ico"
+			type="image/x-icon"
+		/>
 		<link rel="stylesheet" href="../css/electronics.css" />
 	</head>
 	<body>
@@ -33,6 +37,12 @@
 					</select>
 				</div>
 			</nav>
+			<main class="products-section">
+				<small>4 page / 60 items</small>
+				<div class="products"></div>
+				<span class="back-products"> 🔙 </span>
+				<span class="next-products"> ⏭️</span>
+			</main>
 			<footer class="footer">
 				<a
 					href="https://github.com/brandonporcel"
@@ -44,9 +54,15 @@
 				<small>uwu</small>
 			</footer>
 		</div>
-
-		</div>
-		
+		<template id="product-template">
+			<div class="product">
+				<div class="product-img-ctn">
+					<img class="product-img" src="" alt="" />
+				</div>
+				<p class="product-name">product name</p>
+				<p>$30 pesos</p>
+			</div>
+		</template>
 		<script type="module" src="../js/electronics.js"></script>
 	</body>
 </html>
