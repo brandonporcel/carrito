@@ -75,11 +75,15 @@ img {
 	height: fit-content;
 	margin-bottom: 20px;
 	cursor: pointer;
+	/* position: relative; */
+	/* z-index: 10; */
 }
 .product-img-ctn {
 	height: 200px;
 	position: relative;
 	margin-bottom: 10px;
+	/* position: relative; */
+	/* z-index: 5; */
 }
 .product-img {
 	height: 100%;
@@ -87,8 +91,6 @@ img {
 	position: absolute;
 	object-fit: cover;
 	object-position: 50% 0;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
 }
 .product-name {
 	width: 100%;
@@ -112,6 +114,7 @@ img {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 20;
 }
 .pop-up-ctn {
 	width: 300px;
