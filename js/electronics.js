@@ -49,8 +49,11 @@ const cart = () => {
 	const addCartBtn = d.querySelector('.pop-up-cart');
 	addCartBtn.addEventListener('click', (e) => {
 		e.preventDefault();
-		const productInfo = myArray.find((x) => x.id === '45');
-		console.log(productInfo);
+		const a = e.target.parentElement;
+		console.log(a);
+		// const productInfo = myArray.find((x) => x.id === '45');
+		// console.log(productInfo);
+		console.log(a.querySelector('.pop-up-name').textContent);
 	});
 };
 
