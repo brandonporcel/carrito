@@ -1,3 +1,4 @@
+import categoryChange from './modules/categoryChange.js';
 import darkMode from './modules/darkMode.js';
 import getData from './modules/getData.js';
 import popUp from './modules/popUp.js';
@@ -36,15 +37,8 @@ const drawProducts = async () => {
 	document.querySelector('.products').innerHTML = '';
 	d.querySelector('.products').appendChild($fragment);
 };
-const categoryChange = () => {
-	const $select = d.getElementById('sort-by-category');
+const finalSection = () => {};
 
-	$select.addEventListener('change', () => {
-		if ($select.value === 'jewelery') {
-			window.location.pathname = '/pages/jewelery.html';
-		}
-	});
-};
 d.addEventListener('DOMContentLoaded', async () => {
 	darkMode();
 	await drawProducts();
