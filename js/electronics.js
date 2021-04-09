@@ -3,7 +3,12 @@ import darkMode from './modules/darkMode.js';
 import getData from './modules/getData.js';
 import popUp from './modules/popUp.js';
 const d = document;
-
+let cartito = [];
+let producto = {};
+const myArray = [
+	{ id: '73', name: 'messi' },
+	{ id: '45', name: 'leo' },
+];
 const drawProducts = async () => {
 	const $fragment = d.createDocumentFragment();
 	const $productTemplate = d.getElementById('product-template').content;
@@ -14,6 +19,8 @@ const drawProducts = async () => {
 		'https://fakestoreapi.com/products/category/electronics'
 	);
 	data.forEach((el) => {
+		d.querySelector('.pop-up-cart').dataset.id = el.id;
+		d.querySelector('.pop-up-buy').dataset.id = el.id;
 		$productTemplate.querySelector('.product').dataset.price = el.price;
 		$productTemplate.querySelector('.product').dataset.title = el.title;
 		$productTemplate.querySelector('.product').dataset.description =
@@ -37,11 +44,20 @@ const drawProducts = async () => {
 	document.querySelector('.products').innerHTML = '';
 	d.querySelector('.products').appendChild($fragment);
 };
-const finalSection = () => {};
+const cart = () => {
+	const buyBtn = d.querySelector('.pop-up-buy');
+	const addCartBtn = d.querySelector('.pop-up-cart');
+	addCartBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+		const productInfo = myArray.find((x) => x.id === '45');
+		console.log(productInfo);
+	});
+};
 
 d.addEventListener('DOMContentLoaded', async () => {
 	darkMode();
 	await drawProducts();
 	popUp();
 	categoryChange();
+	cart();
 });
