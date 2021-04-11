@@ -1,13 +1,9 @@
 import darkMode from './modules/darkMode.js';
-import incrementCart from './electronics.js';
+import aa from './electronics.js';
+console.log(aa());
 const d = document;
-const $cartBtn = d.querySelector('.carritoBtn');
-let num = incrementCart();
-const changeHeaderCart = () => {
-	$cartBtn.textContent = `🛒/${num}`;
-};
+const addCartBtn = d.querySelector('.pop-up-cart');
 
 d.addEventListener('DOMContentLoaded', () => {
 	darkMode();
-	changeHeaderCart();
 });
