@@ -81,16 +81,24 @@
 		</section>
 		<template id="summary-template">
 				<article class="item-cart">
-					<div class="item-img-ctn">
-						<img class="item-img" />
-					</div>
 					<div class="item-info">
-						<p class="item-name"></p>
-
+						<div class="item-img-name">
+							<div class="item-img-ctn">
+								<img class="item-img" />
+							</div>
+							<span class="item-name"></span>
+						</div>
+						<div class="item-quantity-ctn">
+							<button class="item-quantity-subtract item-quantity-btn">-</button>
+							<span class="item-quantity"></span>
+							<button class="item-quantity-add item-quantity-btn">+</button>
+						</div>
+						<span class="item-price"></span>
 					</div>
-					<div class="item-actions"></div>
-					<div class="cart-summary"></div>			
-			</div>
+					<div class="item-actions">
+						<small class="item-action-delete">delete</small>
+					</div>
+					<div class="cart-summary"></div>
 		</template>
 		<template id="product-template">
 			<article class="product">
@@ -99,6 +107,7 @@
 				</div>
 				<p class="product-name"></p>
 				<p class="product-price"></p>
+				<button class="pop-up-btn pop-up-cart">Add to Cart</button>
 			</article>
 		</template>
 		<script type="module" src="../js/electronics.js"></script>
