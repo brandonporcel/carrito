@@ -17,10 +17,12 @@ const drawProducts = async () => {
 		// con esto pongo la info en el pop up.
 		$productTemplate.querySelector('.product').dataset.price = el.price;
 		$productTemplate.querySelector('.product').dataset.title = el.title;
+		$productTemplate.querySelector('.product').dataset.img = el.image;
 		$productTemplate.querySelector('.product').dataset.description =
 			el.description;
 		// con esto pongo la info en el pop up. otra vez porque el user puede hacer el click en .product-img-ctn o en .product
 		$productTemplate.querySelector('.product-img-ctn').dataset.price = el.price;
+		$productTemplate.querySelector('.product-img-ctn').dataset.img = el.image;
 		$productTemplate.querySelector('.product-img-ctn').dataset.title = el.title;
 		$productTemplate.querySelector('.product-img-ctn').dataset.description =
 			el.description;

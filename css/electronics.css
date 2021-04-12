@@ -114,8 +114,14 @@ body {
 .pop-up-img-ctn {
 	width: 100%;
 	height: 30%;
-	background: #000;
 	margin-bottom: 20px;
+	position: relative;
+}
+.pop-up-img {
+	position: absolute;
+	object-fit: cover;
+	height: 100%;
+	object-position: 50% 0;
 }
 .pop-up-info {
 	height: 65%;
@@ -160,7 +166,16 @@ body {
 	cursor: pointer;
 	background-color: rgba(255, 255, 255, 0.9);
 }
-
+/*  */
+.item-img-ctn {
+	width: 20px;
+	height: 40px;
+	position: relative;
+}
+.item-img {
+	position: absolute;
+	background-position: center;
+}
 /*  */
 .footer {
 	border-top: 1px solid;
@@ -168,9 +183,9 @@ body {
 	padding: 10px 0;
 }
 /*  */
-.none {
-	display: none;
-}
 .loader {
 	width: 50%;
+}
+.none {
+	display: none;
 }

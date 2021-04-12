@@ -18,10 +18,8 @@
 				<h1>
 					<a href="/">TUVI</a>
 				</h1>
-				<span id="darkmodeBtn" class="darkmodeBtn">CHANGE THEME ◑</span>
-				<a href="money.html">
-					<span class="carritoBtn">🛒</span>
-				</a>
+				<span id="darkmodeBtn" class="darkmodeBtn">THEME ◑</span>
+				<span class="carritoBtn">🛒</span>
 			</header>
 			<nav class="sort-nav">
 				<div class="category-sort">
@@ -42,7 +40,8 @@
 				</div>
 			</nav>
 			<main class="products-section">
-				<div class="products"></div>
+				<section class="products"></section>
+				<section class="cart-items-ctn"></section>
 			</main>
 			<footer class="footer">
 				<a
@@ -59,7 +58,7 @@
 			<article class="pop-up-ctn">
 				<button class="pop-up-close-btn">X</button>
 				<div class="pop-up-img-ctn">
-					<img src="" alt="" />
+					<img class="pop-up-img" />
 				</div>
 				<div class="pop-up-info">
 					<div>
@@ -80,14 +79,27 @@
 				</div>
 			</article>
 		</section>
+		<template id="summary-template">
+				<article class="item-cart">
+					<div class="item-img-ctn">
+						<img class="item-img" />
+					</div>
+					<div class="item-info">
+						<p class="item-name"></p>
+
+					</div>
+					<div class="item-actions"></div>
+					<div class="cart-summary"></div>			
+			</div>
+		</template>
 		<template id="product-template">
-			<div class="product">
+			<article class="product">
 				<div class="product-img-ctn">
 					<img class="product-img" />
 				</div>
 				<p class="product-name"></p>
 				<p class="product-price"></p>
-			</div>
+			</article>
 		</template>
 		<script type="module" src="../js/electronics.js"></script>
 	</body>

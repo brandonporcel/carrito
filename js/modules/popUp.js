@@ -2,6 +2,7 @@ const d = document;
 const setPopUpInfo = (info) => {
 	// ese id es para que cuando click al add to cart inserte ese id en el objeto
 	d.querySelector('.pop-up-name').dataset.id = info.dataset.id;
+	d.querySelector('.pop-up-img').src = info.dataset.img;
 	d.querySelector('.pop-up-name').textContent = info.dataset.title;
 	d.querySelector('.pop-up-price').textContent = `$${info.dataset.price}`;
 	d.querySelector('.pop-up-description').textContent = info.dataset.description;
