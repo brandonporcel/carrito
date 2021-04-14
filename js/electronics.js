@@ -8,18 +8,12 @@ let product = {};
 let sumaCantidad = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
+
 const deleteProduct = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.item-action-delete')) {
-			// returns the object. i dont do this cuz i am a boludo and because i dont wanna call the api again
-			// sorry for this spaggethi code
-			const product = e.target.parentElement.parentElement.querySelector(
-				'.item-name'
-			);
-			const productInfo = Object.values(carrito).find(
-				(product) => product.name === product
-			);
-			console.log(productInfo);
+			delete carrito[e.target.dataset.id];
+			showSummary();
 		}
 	});
 };
@@ -64,6 +58,10 @@ const showSummary = () => {
 		//delete product?
 		if (el.quantity === 0) return;
 
+		// para eliminar producto
+		$summaryFragment.querySelectorAll('.item-action-delete').forEach((btn) => {
+			btn.dataset.id = el.id;
+		});
 		// sumar y restar btn.les doy su atributo para seleccionar seleccionar el producto correcto
 		$summaryFragment.querySelectorAll('.item-quantity-btn').forEach((btn) => {
 			btn.dataset.id = el.id;
@@ -86,8 +84,11 @@ const showSummary = () => {
 	});
 };
 $cartBtn.addEventListener('click', () => {
+	if (cartLength === 0) return;
+
 	d.querySelector('.buy-btn').classList.remove('none');
 	showSummary();
+	deleteProduct();
 });
 const restar = () => {
 	d.addEventListener('click', (e) => {
@@ -149,7 +150,7 @@ d.addEventListener('DOMContentLoaded', async () => {
 	sumar();
 	restar();
 	buy();
-	deleteProduct();
+
 	//
 	cart();
 	showSummary();
