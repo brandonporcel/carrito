@@ -10,9 +10,6 @@ const setPopUpInfo = (info) => {
 const popUp = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.product') || e.target.matches('.product *')) {
-			if (e.target.matches('.pop-up-btn')) {
-				return;
-			}
 			// e.target.parentElement=.product-img-ctn || .product---->they had the same data-attributes
 			setPopUpInfo(e.target.parentElement);
 			d.querySelector('.pop-up-wrapper').classList.remove('none');
