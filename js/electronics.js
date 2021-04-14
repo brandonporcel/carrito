@@ -10,7 +10,19 @@ let sumaCantidad = 0;
 let finalPrice = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-
+const checkEmptyCart = (cartProduct) => {
+	if (cartProduct.quantity === 0 || cartProduct.quantity < 1) {
+		cartProduct = null;
+		return;
+	}
+	d.querySelector('.buy-btn').classList.add('none');
+};
+const buy = () => {
+	d.querySelector('.buy-btn').addEventListener('click', () => {
+		alert('en un rato te envio las cosas bb');
+		location.reload();
+	});
+};
 const showSummary = () => {
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
@@ -46,23 +58,20 @@ const showSummary = () => {
 	sumaCantidad = 0;
 	Object.keys(carrito).forEach((el) => {
 		sumaCantidad += carrito[el].quantity * carrito[el].price;
-		d.getElementById('final-price').textContent = 'final ' + sumaCantidad;
+		d.getElementById('final-price').textContent =
+			'final price: ' + sumaCantidad;
 	});
 };
 $cartBtn.addEventListener('click', () => {
+	d.querySelector('.buy-btn').classList.remove('none');
 	showSummary();
 });
 const restar = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.item-quantity-subtract')) {
 			if (carrito[e.target.dataset.id]) {
-				if (
-					carrito[e.target.dataset.id].quantity === 0 ||
-					carrito[e.target.dataset.id].quantity < 1
-				) {
-					delete carrito[e.target.dataset.id];
-					return;
-				}
+				checkEmptyCart(carrito[e.target.dataset.id]);
+
 				carrito[e.target.dataset.id].quantity--;
 				showSummary();
 			}
@@ -116,6 +125,7 @@ d.addEventListener('DOMContentLoaded', async () => {
 	// acciones
 	sumar();
 	restar();
+	buy();
 	//
 	cart();
 	showSummary();
