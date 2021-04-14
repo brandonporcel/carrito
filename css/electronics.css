@@ -168,6 +168,7 @@ body {
 }
 /*  */
 .item-cart {
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
 .item-info {
@@ -214,9 +215,13 @@ body {
 .item-action-delete {
 	font-size: 12px;
 	color: var(--hover-text-color);
+	cursor: pointer;
 }
 .cart-summary {
 	text-align: right;
+}
+.empty-cart {
+	cursor: pointer;
 }
 /*  */
 .footer {
