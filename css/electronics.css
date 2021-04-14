@@ -215,6 +215,9 @@ body {
 	font-size: 12px;
 	color: var(--hover-text-color);
 }
+.cart-summary {
+	text-align: right;
+}
 /*  */
 .footer {
 	border-top: 1px solid;

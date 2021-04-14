@@ -80,25 +80,31 @@
 			</article>
 		</section>
 		<template id="summary-template">
-				<article class="item-cart">
-					<div class="item-info">
-						<div class="item-img-name">
-							<div class="item-img-ctn">
-								<img class="item-img" />
-							</div>
-							<span class="item-name"></span>
+			<article class="item-cart">
+				<div class="item-info">
+					<div class="item-img-name">
+						<div class="item-img-ctn">
+							<img class="item-img" />
 						</div>
-						<div class="item-quantity-ctn">
-							<button class="item-quantity-subtract item-quantity-btn">-</button>
-							<span class="item-quantity"></span>
-							<button class="item-quantity-add item-quantity-btn">+</button>
-						</div>
-						<span class="item-price"></span>
+						<span class="item-name"></span>
 					</div>
-					<div class="item-actions">
-						<small class="item-action-delete">delete</small>
+					<div class="item-quantity-ctn">
+						<button class="item-quantity-subtract item-quantity-btn">-</button>
+						<span class="item-quantity"></span>
+						<button class="item-quantity-add item-quantity-btn">+</button>
 					</div>
-					<div class="cart-summary"></div>
+					<span class="item-price"></span>
+				</div>
+				<div class="item-actions">
+					<small class="item-action-delete">delete</small>
+				</div>
+				<div class="cart-summary">
+					<span id="final-price"></span>
+				</div>
+				<div class="cart-summary">
+					<span id="final-price"></span>
+				</div>
+			</article>
 		</template>
 		<template id="product-template">
 			<article class="product">
@@ -107,7 +113,6 @@
 				</div>
 				<p class="product-name"></p>
 				<p class="product-price"></p>
-				
 			</article>
 		</template>
 		<script type="module" src="../js/electronics.js"></script>

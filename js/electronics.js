@@ -6,6 +6,8 @@ const d = document;
 let carrito = {};
 let product = {};
 let sumaCantidad = 0;
+
+let finalPrice = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
 
@@ -15,7 +17,6 @@ const showSummary = () => {
 	sumaCantidad = 0;
 	Object.values(carrito).forEach((el) => {
 		d.querySelector('.products').classList.add('none');
-
 		// stop duplicate template,rewrite
 		if (d.querySelectorAll('.item-cart').length > 0) {
 			d.querySelectorAll('.item-cart').forEach((el) => {
@@ -37,10 +38,16 @@ const showSummary = () => {
 		$summaryFragment.querySelector('.item-quantity').textContent = el.quantity;
 		$summaryFragment.querySelector('.item-price').textContent =
 			el.price * el.quantity;
+		// $summaryFragment.querySelector('#final-price').textContent = finalPrice;
 		const $clone = $summaryFragment.cloneNode(true);
 		$fragment.appendChild($clone);
 	});
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
+	sumaCantidad = 0;
+	Object.keys(carrito).forEach((el) => {
+		sumaCantidad += carrito[el].quantity * carrito[el].price;
+		d.getElementById('final-price').textContent = 'final ' + sumaCantidad;
+	});
 };
 $cartBtn.addEventListener('click', () => {
 	showSummary();
