@@ -22,6 +22,9 @@ const showSummary = () => {
 				el.remove();
 			});
 		}
+		// change cart number
+		sumaCantidad += el.quantity;
+		$cartBtn.textContent = `🛒/${sumaCantidad}`;
 		//delete product
 		if (el.quantity === 0) return;
 
@@ -36,9 +39,6 @@ const showSummary = () => {
 			el.price * el.quantity;
 		const $clone = $summaryFragment.cloneNode(true);
 		$fragment.appendChild($clone);
-		// change cart number
-		sumaCantidad += el.quantity;
-		$cartBtn.textContent = `🛒/${sumaCantidad}`;
 	});
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
 };
