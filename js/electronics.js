@@ -7,10 +7,8 @@ let carrito = {};
 let product = {};
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-$cartBtn.textContent = `🛒/${cartLength}`;
 
 const showSummary = () => {
-	$cartBtn.textContent = `🛒/${cartLength}`;
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
 	Object.values(carrito).forEach((el) => {
@@ -31,7 +29,8 @@ const showSummary = () => {
 		$summaryFragment.querySelector('.item-name').textContent = el.name;
 		$summaryFragment.querySelector('.item-img').src = el.img;
 		$summaryFragment.querySelector('.item-quantity').textContent = el.quantity;
-		$summaryFragment.querySelector('.item-price').textContent = el.price;
+		$summaryFragment.querySelector('.item-price').textContent =
+			el.price * el.quantity;
 		const $clone = $summaryFragment.cloneNode(true);
 		$fragment.appendChild($clone);
 	});
@@ -41,9 +40,10 @@ $cartBtn.addEventListener('click', () => {
 	showSummary();
 });
 const restar = () => {
+	let sumaCantidad = 0;
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.item-quantity-subtract')) {
-			$cartBtn.textContent = `🛒/${cartLength}`;
+			sumaCantidad = 0;
 			if (carrito[e.target.dataset.id]) {
 				if (
 					carrito[e.target.dataset.id].quantity === 0 ||
@@ -52,8 +52,16 @@ const restar = () => {
 					delete carrito[e.target.dataset.id];
 					return;
 				}
+
 				carrito[e.target.dataset.id].quantity--;
+				Object.values(carrito).forEach((el) => {
+					sumaCantidad += el.quantity;
+					console.log(sumaCantidad);
+				});
+				console.log(sumaCantidad, 'fuerra');
+				$cartBtn.textContent = `🛒/${sumaCantidad}`;
 			}
+
 			showSummary();
 		}
 	});
@@ -61,20 +69,18 @@ const restar = () => {
 const sumar = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.item-quantity-add')) {
-			$cartBtn.textContent = `🛒/${cartLength}`;
 			carrito[e.target.dataset.id].quantity++;
-			d.querySelector('.item-price').textContent =
-				carrito[e.target.dataset.id].price *
-				carrito[e.target.dataset.id].quantity;
+
 			showSummary();
 		}
 	});
 };
 const cart = () => {
+	$cartBtn.textContent = `🛒/${cartLength}`;
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.pop-up-btn')) {
-			$cartBtn.textContent = `🛒/${cartLength}`;
 			cartLength += 1;
+			$cartBtn.textContent = `🛒/${cartLength}`;
 			const name = d.querySelector('.pop-up-name').textContent;
 			const price = d.querySelector('.pop-up-price').textContent;
 			const id = d.querySelector('.pop-up-name').dataset.id;

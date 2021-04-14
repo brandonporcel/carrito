@@ -4,7 +4,7 @@ const setPopUpInfo = (info) => {
 	d.querySelector('.pop-up-name').dataset.id = info.dataset.id;
 	d.querySelector('.pop-up-img').src = info.dataset.img;
 	d.querySelector('.pop-up-name').textContent = info.dataset.title;
-	d.querySelector('.pop-up-price').textContent = `$${info.dataset.price}`;
+	d.querySelector('.pop-up-price').textContent = info.dataset.price;
 	d.querySelector('.pop-up-description').textContent = info.dataset.description;
 };
 const popUp = () => {
