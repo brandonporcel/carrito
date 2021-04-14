@@ -12,8 +12,18 @@ const $cartBtn = d.querySelector('.carritoBtn');
 const deleteProduct = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.item-action-delete')) {
+			console.log(carrito, 'anets');
+			if (d.querySelectorAll('.item-cart').length > 0) {
+				if (Object.keys(carrito).length === 0) {
+					console.log(carrito, 'igaula 0');
+					d.querySelectorAll('.item-cart').forEach((el) => {
+						delete carrito[el.dataset.id];
+					});
+				}
+			}
 			delete carrito[e.target.dataset.id];
 			showSummary();
+			console.log(carrito, 'despues');
 		}
 	});
 };
