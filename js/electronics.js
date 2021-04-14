@@ -7,14 +7,10 @@ let carrito = {};
 let product = {};
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-const sumar = (cart) => {
-	if (carrito.hasOwnProperty(product.id)) {
-		// al product que se hizo click=hago click en otro product empiezo de 1.
-		product.quantity = carrito[product.id].quantity + 1;
-	}
-};
+$cartBtn.textContent = `🛒/${cartLength}`;
 
 const showSummary = () => {
+	$cartBtn.textContent = `🛒/${cartLength}`;
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
 	Object.values(carrito).forEach((el) => {
@@ -25,6 +21,9 @@ const showSummary = () => {
 				el.remove();
 			});
 		}
+		//delete product
+		if (el.quantity === 0) return;
+
 		// sumar y restar btn.les doy su atributo para seleccionar seleccionar el producto correcto
 		$summaryFragment.querySelectorAll('.item-quantity-btn').forEach((btn) => {
 			btn.dataset.id = el.id;
@@ -44,6 +43,7 @@ $cartBtn.addEventListener('click', () => {
 const restar = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.item-quantity-subtract')) {
+			$cartBtn.textContent = `🛒/${cartLength}`;
 			if (carrito[e.target.dataset.id]) {
 				if (
 					carrito[e.target.dataset.id].quantity === 0 ||
@@ -58,12 +58,23 @@ const restar = () => {
 		}
 	});
 };
+const sumar = () => {
+	d.addEventListener('click', (e) => {
+		if (e.target.matches('.item-quantity-add')) {
+			$cartBtn.textContent = `🛒/${cartLength}`;
+			carrito[e.target.dataset.id].quantity++;
+			d.querySelector('.item-price').textContent =
+				carrito[e.target.dataset.id].price *
+				carrito[e.target.dataset.id].quantity;
+			showSummary();
+		}
+	});
+};
 const cart = () => {
-	$cartBtn.textContent = `🛒/${cartLength}`;
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.pop-up-btn')) {
-			cartLength += 1;
 			$cartBtn.textContent = `🛒/${cartLength}`;
+			cartLength += 1;
 			const name = d.querySelector('.pop-up-name').textContent;
 			const price = d.querySelector('.pop-up-price').textContent;
 			const id = d.querySelector('.pop-up-name').dataset.id;
@@ -80,7 +91,10 @@ const cart = () => {
 			};
 			product.quantity = 1;
 
-			sumar();
+			if (carrito.hasOwnProperty(product.id)) {
+				// al product que se hizo click=hago click en otro product empiezo de 1.
+				product.quantity = carrito[product.id].quantity + 1;
+			}
 			carrito[product.id] = { ...product };
 		}
 	});
@@ -91,7 +105,10 @@ d.addEventListener('DOMContentLoaded', async () => {
 	drawProducts();
 	popUp();
 	categoryChange();
+	// acciones
+	sumar();
 	restar();
+	//
 	cart();
 	showSummary();
 });
