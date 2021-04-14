@@ -6,16 +6,17 @@ const d = document;
 let carrito = {};
 let product = {};
 let sumaCantidad = 0;
-
-let finalPrice = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
 const checkEmptyCart = (cartProduct) => {
 	if (cartProduct.quantity === 0 || cartProduct.quantity < 1) {
+		console.log(d.querySelector('.buy-btn'));
+		console.log(carrito);
+		console.log('hola');
+		d.querySelector('.buy-btn').classList.add('none');
 		cartProduct = null;
 		return;
 	}
-	d.querySelector('.buy-btn').classList.add('none');
 };
 const buy = () => {
 	d.querySelector('.buy-btn').addEventListener('click', () => {
@@ -38,7 +39,7 @@ const showSummary = () => {
 		// change cart number
 		sumaCantidad += el.quantity;
 		$cartBtn.textContent = `🛒/${sumaCantidad}`;
-		//delete product
+		//delete product?
 		if (el.quantity === 0) return;
 
 		// sumar y restar btn.les doy su atributo para seleccionar seleccionar el producto correcto
@@ -118,6 +119,7 @@ const cart = () => {
 };
 
 d.addEventListener('DOMContentLoaded', async () => {
+	// modules
 	darkMode();
 	drawProducts();
 	popUp();
