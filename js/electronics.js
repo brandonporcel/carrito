@@ -47,7 +47,7 @@ const checkEmptyCart = (cartProduct) => {
 };
 const buy = () => {
 	d.querySelector('.buy-btn').addEventListener('click', () => {
-		alert('en un rato te envio las cosas bb');
+		alert("in a little while I'll send you the products bb");
 		location.reload();
 	});
 };
@@ -82,24 +82,25 @@ const showSummary = () => {
 		$summaryFragment.querySelector('.item-quantity').textContent = el.quantity;
 		$summaryFragment.querySelector('.item-price').textContent =
 			el.price * el.quantity;
-		// $summaryFragment.querySelector('#final-price').textContent = finalPrice;
 		const $clone = $summaryFragment.cloneNode(true);
 		$fragment.appendChild($clone);
 	});
+
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
 	sumaCantidad = 0;
 	Object.keys(carrito).forEach((el) => {
 		// hacer la suma de todos los quantity(const)., si es 0 reotrnar
-		if (el.quantity > 0) {
-			sumaCantidad += carrito[el].quantity * carrito[el].price;
-			d.getElementById('final-price').textContent =
-				'final price: ' + sumaCantidad;
-		}
+		console.log(el);
+		// if (el.quantity > 0) {
+		// 	sumaCantidad += carrito[el].quantity * carrito[el].price;
+		// 	d.getElementById('final-price').textContent =
+		// 		'final price: ' + sumaCantidad;
+		// }
 	});
 };
 $cartBtn.addEventListener('click', () => {
 	if (cartLength === 0) return;
-
+	d.querySelector('.cart-items-ctn').classList.remove('none');
 	d.querySelector('.buy-btn').classList.remove('none');
 	showSummary();
 	deleteProduct();
