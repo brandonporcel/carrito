@@ -8,7 +8,7 @@ let product = {};
 let sumaCantidad = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-const actions = (deleteBtn, addBtn, subtractBtn) => {
+const actions = (deleteBtn, addBtn, subtractBtn, buyBtn) => {
 	d.addEventListener('click', (e) => {
 		// deleteProduct
 		sumaCantidad = 0;
@@ -40,6 +40,11 @@ const actions = (deleteBtn, addBtn, subtractBtn) => {
 				showSummary();
 			}
 		}
+		// buy
+		if (e.target.matches(buyBtn)) {
+			alert("in a little while I'll send you the products bb");
+			location.reload();
+		}
 	});
 };
 
@@ -62,12 +67,7 @@ const checkEmptyCart = (cartProduct) => {
 		return;
 	}
 };
-const buy = () => {
-	d.querySelector('.buy-btn').addEventListener('click', () => {
-		alert("in a little while I'll send you the products bb");
-		location.reload();
-	});
-};
+
 const showFinalPrice = (cart) => {
 	sumaCantidad = 0;
 	Object.values(cart).forEach((el) => {
@@ -162,14 +162,13 @@ d.addEventListener('DOMContentLoaded', async () => {
 	drawProducts();
 	popUp();
 	categoryChange();
-	// acciones
+
 	actions(
 		'.item-action-delete',
 		'.item-quantity-add',
-		'.item-quantity-subtract'
+		'.item-quantity-subtract',
+		'.buy-btn'
 	);
-	buy();
 	//
 	cart();
-	showSummary();
 });
