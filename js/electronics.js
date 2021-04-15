@@ -91,7 +91,7 @@ const showSummary = () => {
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
 	d.querySelector('.products').classList.add('none');
-
+	changeCartNumber();
 	Object.values(carrito).forEach((el) => {
 		// stop duplicate template,rewrite
 		if (d.querySelectorAll('.item-cart').length > 0) {
