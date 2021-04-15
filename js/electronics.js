@@ -6,7 +6,6 @@ const d = document;
 let carrito = {};
 let product = {};
 let sumaCantidad = 0;
-let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
 const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 	d.addEventListener('click', (e) => {
@@ -18,7 +17,6 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 			delete carrito[e.target.dataset.id];
 			showSummary();
 			checkEmptyCart();
-			changeCartNumber();
 		}
 		// add
 		if (e.target.matches(addBtn)) {
@@ -40,9 +38,8 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 		}
 		// click on the header cart
 		if (e.target === cartBtn) {
-			if (cartLength === 0) return;
+			checkEmptyCart();
 			d.querySelector('.cart-items-ctn').classList.remove('none');
-			d.querySelector('.buy-btn').classList.remove('none');
 			showSummary();
 		}
 	});
@@ -54,7 +51,7 @@ const checkEmptyCart = (cartProduct) => {
 	Object.values(carrito).forEach((el) => {
 		sumaCantidad += el.quantity;
 	});
-
+	changeCartNumber();
 	if (sumaCantidad === 0) {
 		$emptyCartText.classList.remove('none');
 		$emptyCartText.addEventListener('click', () => {
@@ -65,6 +62,8 @@ const checkEmptyCart = (cartProduct) => {
 		cartProduct = null;
 		showSummary();
 		return;
+	} else {
+		d.querySelector('.buy-btn').classList.remove('none');
 	}
 };
 const changeCartNumber = () => {
@@ -127,10 +126,9 @@ const showSummary = () => {
 	showFinalPrice(carrito);
 };
 
-const cart = () => {
+const AddToCart = () => {
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.pop-up-btn')) {
-			cartLength += 1;
 			const name = d.querySelector('.pop-up-name').textContent;
 			const price = d.querySelector('.pop-up-price').textContent;
 			const id = d.querySelector('.pop-up-name').dataset.id;
@@ -168,5 +166,5 @@ d.addEventListener('DOMContentLoaded', async () => {
 		'.buy-btn',
 		$cartBtn
 	);
-	cart();
+	AddToCart();
 });
