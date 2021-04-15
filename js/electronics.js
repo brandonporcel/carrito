@@ -8,7 +8,7 @@ let product = {};
 let sumaCantidad = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-const actions = (deleteBtn) => {
+const actions = (deleteBtn, addBtn, subtractBtn) => {
 	d.addEventListener('click', (e) => {
 		// deleteProduct
 		sumaCantidad = 0;
@@ -23,9 +23,21 @@ const actions = (deleteBtn) => {
 				sumaCantidad += el.quantity;
 			});
 			$cartBtn.textContent = `🛒/${sumaCantidad}`;
-			console.log(sumaCantidad);
 			if (sumaCantidad === 0) {
 				checkEmptyCart();
+			}
+		}
+		// add
+		if (e.target.matches(addBtn)) {
+			carrito[e.target.dataset.id].quantity++;
+			showSummary();
+		}
+		// subtract
+		if (e.target.matches(subtractBtn)) {
+			if (carrito[e.target.dataset.id]) {
+				carrito[e.target.dataset.id].quantity--;
+				checkEmptyCart(carrito[e.target.dataset.id]);
+				showSummary();
 			}
 		}
 	});
@@ -112,25 +124,7 @@ $cartBtn.addEventListener('click', () => {
 	d.querySelector('.buy-btn').classList.remove('none');
 	showSummary();
 });
-const restar = () => {
-	d.addEventListener('click', (e) => {
-		if (e.target.matches('.item-quantity-subtract')) {
-			if (carrito[e.target.dataset.id]) {
-				carrito[e.target.dataset.id].quantity--;
-				checkEmptyCart(carrito[e.target.dataset.id]);
-				showSummary();
-			}
-		}
-	});
-};
-const sumar = () => {
-	d.addEventListener('click', (e) => {
-		if (e.target.matches('.item-quantity-add')) {
-			carrito[e.target.dataset.id].quantity++;
-			showSummary();
-		}
-	});
-};
+
 const cart = () => {
 	$cartBtn.textContent = `🛒/${cartLength}`;
 	d.addEventListener('click', (e) => {
@@ -169,11 +163,12 @@ d.addEventListener('DOMContentLoaded', async () => {
 	popUp();
 	categoryChange();
 	// acciones
-	actions('.item-action-delete');
-	sumar();
-	restar();
+	actions(
+		'.item-action-delete',
+		'.item-quantity-add',
+		'.item-quantity-subtract'
+	);
 	buy();
-
 	//
 	cart();
 	showSummary();
