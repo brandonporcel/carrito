@@ -87,15 +87,14 @@ const showSummary = () => {
 	});
 
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
+
 	sumaCantidad = 0;
-	Object.keys(carrito).forEach((el) => {
-		// hacer la suma de todos los quantity(const)., si es 0 reotrnar
-		console.log(el);
-		// if (el.quantity > 0) {
-		// 	sumaCantidad += carrito[el].quantity * carrito[el].price;
-		// 	d.getElementById('final-price').textContent =
-		// 		'final price: ' + sumaCantidad;
-		// }
+	Object.values(carrito).forEach((el) => {
+		sumaCantidad += el.price;
+		if (sumaCantidad > 0) {
+			d.getElementById('final-price').textContent =
+				'final price: ' + sumaCantidad;
+		}
 	});
 };
 $cartBtn.addEventListener('click', () => {
