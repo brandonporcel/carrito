@@ -8,15 +8,11 @@ let product = {};
 let sumaCantidad = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-const actions = () => {
+const actions = (deleteBtn) => {
 	d.addEventListener('click', (e) => {
-		console.log('log');
-	});
-};
-const deleteProduct = () => {
-	d.addEventListener('click', (e) => {
+		// deleteProduct
 		sumaCantidad = 0;
-		if (e.target.matches('.item-action-delete')) {
+		if (e.target.matches(deleteBtn)) {
 			// console.log(carrito, 'anets');
 			d.querySelectorAll('.item-cart').forEach((el) => {
 				el.remove();
@@ -27,9 +23,14 @@ const deleteProduct = () => {
 				sumaCantidad += el.quantity;
 			});
 			$cartBtn.textContent = `🛒/${sumaCantidad}`;
+			console.log(sumaCantidad);
+			if (sumaCantidad === 0) {
+				checkEmptyCart();
+			}
 		}
 	});
 };
+
 const checkEmptyCart = (cartProduct) => {
 	const $emptyCartText = d.querySelector('.empty-cart');
 	sumaCantidad = 0;
@@ -110,7 +111,6 @@ $cartBtn.addEventListener('click', () => {
 	d.querySelector('.cart-items-ctn').classList.remove('none');
 	d.querySelector('.buy-btn').classList.remove('none');
 	showSummary();
-	deleteProduct();
 });
 const restar = () => {
 	d.addEventListener('click', (e) => {
@@ -169,6 +169,7 @@ d.addEventListener('DOMContentLoaded', async () => {
 	popUp();
 	categoryChange();
 	// acciones
+	actions('.item-action-delete');
 	sumar();
 	restar();
 	buy();
