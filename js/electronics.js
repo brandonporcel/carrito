@@ -8,7 +8,11 @@ let product = {};
 let sumaCantidad = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-
+const actions = () => {
+	d.addEventListener('click', (e) => {
+		console.log('log');
+	});
+};
 const deleteProduct = () => {
 	d.addEventListener('click', (e) => {
 		sumaCantidad = 0;
