@@ -12,20 +12,13 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 	d.addEventListener('click', (e) => {
 		// deleteProduct
 		if (e.target.matches(deleteBtn)) {
-			sumaCantidad = 0;
-
 			d.querySelectorAll('.item-cart').forEach((el) => {
 				el.remove();
 			});
 			delete carrito[e.target.dataset.id];
 			showSummary();
-			Object.values(carrito).forEach((el) => {
-				sumaCantidad += el.quantity;
-			});
-			if (sumaCantidad === 0) {
-				checkEmptyCart();
-			}
-			$cartBtn.textContent = `🛒/${sumaCantidad}`;
+			checkEmptyCart();
+			changeCartNumber();
 		}
 		// add
 		if (e.target.matches(addBtn)) {
@@ -80,6 +73,9 @@ const changeCartNumber = () => {
 		sumaCantidad += el.quantity;
 		$cartBtn.textContent = `🛒/${sumaCantidad}`;
 	});
+	if (sumaCantidad === 0) {
+		$cartBtn.textContent = `🛒/${sumaCantidad}`;
+	}
 };
 const showFinalPrice = (cart) => {
 	sumaCantidad = 0;
@@ -96,7 +92,7 @@ const showSummary = () => {
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
 	d.querySelector('.products').classList.add('none');
-	changeCartNumber();
+
 	Object.values(carrito).forEach((el) => {
 		// stop duplicate template,rewrite
 		if (d.querySelectorAll('.item-cart').length > 0) {
