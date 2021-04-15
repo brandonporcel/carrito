@@ -51,6 +51,17 @@ const buy = () => {
 		location.reload();
 	});
 };
+const showFinalPrice = (cart) => {
+	sumaCantidad = 0;
+	Object.values(cart).forEach((el) => {
+		// el.price es string""
+		sumaCantidad += parseInt(el.price) * el.quantity;
+	});
+	if (sumaCantidad > 0) {
+		d.getElementById('final-price').textContent =
+			'final price: ' + sumaCantidad;
+	}
+};
 const showSummary = () => {
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
@@ -88,14 +99,7 @@ const showSummary = () => {
 
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
 
-	sumaCantidad = 0;
-	Object.values(carrito).forEach((el) => {
-		sumaCantidad += el.price;
-		if (sumaCantidad > 0) {
-			d.getElementById('final-price').textContent =
-				'final price: ' + sumaCantidad;
-		}
-	});
+	showFinalPrice(carrito);
 };
 $cartBtn.addEventListener('click', () => {
 	if (cartLength === 0) return;
