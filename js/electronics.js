@@ -11,36 +11,37 @@ const $cartBtn = d.querySelector('.carritoBtn');
 
 const deleteProduct = () => {
 	d.addEventListener('click', (e) => {
+		sumaCantidad = 0;
 		if (e.target.matches('.item-action-delete')) {
-			console.log(carrito, 'anets');
-			if (d.querySelectorAll('.item-cart').length > 0) {
-				if (Object.keys(carrito).length === 0) {
-					console.log(carrito, 'igaula 0');
-					d.querySelectorAll('.item-cart').forEach((el) => {
-						delete carrito[el.dataset.id];
-					});
-				}
-			}
+			// console.log(carrito, 'anets');
+			d.querySelectorAll('.item-cart').forEach((el) => {
+				el.remove();
+			});
 			delete carrito[e.target.dataset.id];
 			showSummary();
-			console.log(carrito, 'despues');
+			Object.values(carrito).forEach((el) => {
+				sumaCantidad += el.quantity;
+			});
+			$cartBtn.textContent = `🛒/${sumaCantidad}`;
 		}
 	});
 };
 const checkEmptyCart = (cartProduct) => {
-	// arreglar.
-	// cuando resto produsctos de un item(?) a 0,aparece el msj.
-	// itene que ser ucnado estge todos los p vacios. Object.keys
-	if (cartProduct.quantity === 0 || cartProduct.quantity < 1) {
-		const $emptyCartText = d.querySelector('.empty-cart');
+	const $emptyCartText = d.querySelector('.empty-cart');
+	sumaCantidad = 0;
+	Object.values(carrito).forEach((el) => {
+		sumaCantidad += el.quantity;
+	});
+
+	if (sumaCantidad === 0) {
 		$emptyCartText.classList.remove('none');
 		$emptyCartText.addEventListener('click', () => {
 			location.reload();
 		});
-
 		d.querySelector('#final-price').classList.add('none');
 		d.querySelector('.buy-btn').classList.add('none');
 		cartProduct = null;
+		showSummary();
 		return;
 	}
 };
@@ -88,9 +89,12 @@ const showSummary = () => {
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
 	sumaCantidad = 0;
 	Object.keys(carrito).forEach((el) => {
-		sumaCantidad += carrito[el].quantity * carrito[el].price;
-		d.getElementById('final-price').textContent =
-			'final price: ' + sumaCantidad;
+		// hacer la suma de todos los quantity(const)., si es 0 reotrnar
+		if (el.quantity > 0) {
+			sumaCantidad += carrito[el].quantity * carrito[el].price;
+			d.getElementById('final-price').textContent =
+				'final price: ' + sumaCantidad;
+		}
 	});
 };
 $cartBtn.addEventListener('click', () => {
