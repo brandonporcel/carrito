@@ -7,6 +7,10 @@ let carrito = {};
 let product = {};
 let sumaCantidad = 0;
 const $cartBtn = d.querySelector('.carritoBtn');
+
+const setLocalStorage = () => {
+	localStorage.setItem('cart', JSON.stringify(carrito));
+};
 const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 	d.addEventListener('click', (e) => {
 		// deleteProduct
@@ -121,6 +125,7 @@ const showSummary = () => {
 
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
 	showFinalPrice(carrito);
+	setLocalStorage();
 };
 
 const AddToCart = () => {
@@ -145,10 +150,14 @@ const AddToCart = () => {
 			}
 			carrito[product.id] = { ...product };
 			changeCartNumber();
+			setLocalStorage();
 		}
 	});
 };
-
+if (localStorage.getItem('cart')) {
+	carrito = JSON.parse(localStorage.getItem('cart'));
+	changeCartNumber();
+}
 d.addEventListener('DOMContentLoaded', async () => {
 	// modules
 	darkMode();
