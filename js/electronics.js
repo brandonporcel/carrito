@@ -8,12 +8,12 @@ let product = {};
 let sumaCantidad = 0;
 let cartLength = Object.keys(carrito).length;
 const $cartBtn = d.querySelector('.carritoBtn');
-const actions = (deleteBtn, addBtn, subtractBtn, buyBtn) => {
+const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 	d.addEventListener('click', (e) => {
 		// deleteProduct
-		sumaCantidad = 0;
 		if (e.target.matches(deleteBtn)) {
-			// console.log(carrito, 'anets');
+			sumaCantidad = 0;
+
 			d.querySelectorAll('.item-cart').forEach((el) => {
 				el.remove();
 			});
@@ -22,10 +22,10 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn) => {
 			Object.values(carrito).forEach((el) => {
 				sumaCantidad += el.quantity;
 			});
-			$cartBtn.textContent = `🛒/${sumaCantidad}`;
 			if (sumaCantidad === 0) {
 				checkEmptyCart();
 			}
+			$cartBtn.textContent = `🛒/${sumaCantidad}`;
 		}
 		// add
 		if (e.target.matches(addBtn)) {
@@ -44,6 +44,13 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn) => {
 		if (e.target.matches(buyBtn)) {
 			alert("in a little while I'll send you the products bb");
 			location.reload();
+		}
+		// click on the header cart
+		if (e.target === cartBtn) {
+			if (cartLength === 0) return;
+			d.querySelector('.cart-items-ctn').classList.remove('none');
+			d.querySelector('.buy-btn').classList.remove('none');
+			showSummary();
 		}
 	});
 };
@@ -67,7 +74,13 @@ const checkEmptyCart = (cartProduct) => {
 		return;
 	}
 };
-
+const changeCartNumber = () => {
+	sumaCantidad = 0;
+	Object.values(carrito).forEach((el) => {
+		sumaCantidad += el.quantity;
+		$cartBtn.textContent = `🛒/${sumaCantidad}`;
+	});
+};
 const showFinalPrice = (cart) => {
 	sumaCantidad = 0;
 	Object.values(cart).forEach((el) => {
@@ -82,20 +95,19 @@ const showFinalPrice = (cart) => {
 const showSummary = () => {
 	const $fragment = d.createDocumentFragment();
 	const $summaryFragment = d.getElementById('summary-template').content;
-	sumaCantidad = 0;
+	d.querySelector('.products').classList.add('none');
+	changeCartNumber();
 	Object.values(carrito).forEach((el) => {
-		d.querySelector('.products').classList.add('none');
 		// stop duplicate template,rewrite
 		if (d.querySelectorAll('.item-cart').length > 0) {
 			d.querySelectorAll('.item-cart').forEach((el) => {
 				el.remove();
 			});
 		}
-		// change cart number
-		sumaCantidad += el.quantity;
-		$cartBtn.textContent = `🛒/${sumaCantidad}`;
+
 		//delete product?
 		if (el.quantity === 0) return;
+		// checkEmptyCart
 
 		// para eliminar producto
 		$summaryFragment.querySelectorAll('.item-action-delete').forEach((btn) => {
@@ -118,26 +130,15 @@ const showSummary = () => {
 
 	showFinalPrice(carrito);
 };
-$cartBtn.addEventListener('click', () => {
-	if (cartLength === 0) return;
-	d.querySelector('.cart-items-ctn').classList.remove('none');
-	d.querySelector('.buy-btn').classList.remove('none');
-	showSummary();
-});
 
 const cart = () => {
-	$cartBtn.textContent = `🛒/${cartLength}`;
 	d.addEventListener('click', (e) => {
 		if (e.target.matches('.pop-up-btn')) {
 			cartLength += 1;
-			$cartBtn.textContent = `🛒/${cartLength}`;
 			const name = d.querySelector('.pop-up-name').textContent;
 			const price = d.querySelector('.pop-up-price').textContent;
 			const id = d.querySelector('.pop-up-name').dataset.id;
 			const img = d.querySelector('.pop-up-img').src;
-			// returns the object. i dont do this cuz i am a boludo and because i dont wanna call the api again
-			// const productInfo = Fecthjson.find((x) => x.id === '45');
-
 			// producto es el click actual
 			product = {
 				name,
@@ -152,6 +153,7 @@ const cart = () => {
 				product.quantity = carrito[product.id].quantity + 1;
 			}
 			carrito[product.id] = { ...product };
+			changeCartNumber();
 		}
 	});
 };
@@ -162,13 +164,13 @@ d.addEventListener('DOMContentLoaded', async () => {
 	drawProducts();
 	popUp();
 	categoryChange();
-
+	//
 	actions(
 		'.item-action-delete',
 		'.item-quantity-add',
 		'.item-quantity-subtract',
-		'.buy-btn'
+		'.buy-btn',
+		$cartBtn
 	);
-	//
 	cart();
 });
