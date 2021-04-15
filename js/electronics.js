@@ -27,7 +27,7 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 		if (e.target.matches(subtractBtn)) {
 			if (carrito[e.target.dataset.id]) {
 				carrito[e.target.dataset.id].quantity--;
-				checkEmptyCart(carrito[e.target.dataset.id]);
+				checkEmptyCart();
 				showSummary();
 			}
 		}
@@ -45,13 +45,12 @@ const actions = (deleteBtn, addBtn, subtractBtn, buyBtn, cartBtn) => {
 	});
 };
 
-const checkEmptyCart = (cartProduct) => {
+const checkEmptyCart = () => {
 	const $emptyCartText = d.querySelector('.empty-cart');
 	sumaCantidad = 0;
 	Object.values(carrito).forEach((el) => {
 		sumaCantidad += el.quantity;
 	});
-	changeCartNumber();
 	if (sumaCantidad === 0) {
 		$emptyCartText.classList.remove('none');
 		$emptyCartText.addEventListener('click', () => {
@@ -59,7 +58,6 @@ const checkEmptyCart = (cartProduct) => {
 		});
 		d.querySelector('#final-price').classList.add('none');
 		d.querySelector('.buy-btn').classList.add('none');
-		cartProduct = null;
 		showSummary();
 		return;
 	} else {
@@ -122,7 +120,6 @@ const showSummary = () => {
 	});
 
 	d.querySelector('.cart-items-ctn').appendChild($fragment);
-
 	showFinalPrice(carrito);
 };
 
