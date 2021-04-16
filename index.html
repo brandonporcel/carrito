@@ -15,12 +15,12 @@
 					<a href="/">TUVI</a>
 				</h1>
 				<span id="darkmodeBtn" class="darkmodeBtn">CHANGE THEME ◑</span>
-				<span class="cartitoBtn">🛒/0</span>
+				<span class="carritoBtn">🛒/0</span>
 			</header>
 			<div class="hero">
 				<h2 class="hero-title">S T O R E</h2>
 			</div>
-
+			
 			<section class="select-category-ctn">
 				<article class="categories-article">
 					<div class="categories-ctn">
@@ -69,28 +69,31 @@
 				<small>uwu</small>
 			</footer>
 		</div>
-		<!-- <div class="container">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Item</th>
-						<th>Cantidad</th>
-						<th>Acción</th>
-						<th>Total</th>
-					</tr>
-				</thead>
-				<tbody id="items"></tbody>
-				<tfoot>
-					<tr id="footer">
-						<th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
-					</tr>
-				</tfoot>
-			</table>
-
-			-->
 		</div>
-
+		<template id="summary-template">
+			<article class="item-cart">
+				<div class="item-info">
+					<div class="item-img-name">
+						<div class="item-img-ctn">
+							<img class="item-img" />
+						</div>
+						<span class="item-name"></span>
+					</div>
+					<div class="item-quantity-ctn">
+						<button class="item-quantity-subtract item-quantity-btn">-</button>
+						<span class="item-quantity"></span>
+						<button class="item-quantity-add item-quantity-btn">+</button>
+					</div>
+					<span class="item-price"></span>
+				</div>
+				<div class="item-actions">
+					<small class="item-action-delete">delete</small>
+				</div>
+				<div class="cart-summary">
+					<span id="final-price"></span>
+				</div>
+			</article>
+		</template>
 		<template id="footer-template">
 			<th scope="row" colspan="2">Total productos</th>
 			<td></td>
